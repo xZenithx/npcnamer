@@ -1,5 +1,4 @@
 if not SERVER then return end
-
 local names = {}
 http.Fetch("https://raw.githubusercontent.com/dominictarr/random-name/master/first-names.json", 
     function(body, length, headers, code) 
@@ -11,7 +10,11 @@ http.Fetch("https://raw.githubusercontent.com/dominictarr/random-name/master/fir
 )
 
 hook.Add("OnEntityCreated", "namethatmfnpc", function(ent)
-    if not IsValid(ent) or not ent:IsNPC() or ent:GetName() then return end
+    if not IsValid(ent) or not ent:IsNPC() or ent:GetName() == nil then return end
 
-    ent:SetName(names[math.random(1,#names))])
+    local pickName = names[math.random(#names)]
+    
+    ent:SetNWString("Name", pickName)
+    ent:SetName(pickName)
 end)
+
