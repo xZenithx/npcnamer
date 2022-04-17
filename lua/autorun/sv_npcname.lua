@@ -11,11 +11,7 @@ http.Fetch("https://raw.githubusercontent.com/dominictarr/random-name/master/fir
 )
 
 hook.Add("OnEntityCreated", "namethatmfnpc", function(ent)
-    if IsValid(ent) then 
-        if type(ent) == "NPC" then
-            if ent:GetName() == nil then
-                ent:SetName(names[math.Round(math.Rand(1,#names))])
-            end
-        end
-    end
+    if not IsValid(ent) or not ent:IsNPC() or ent:GetName() then return end
+
+    ent:SetName(names[math.random(1,#names))])
 end)
